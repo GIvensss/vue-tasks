@@ -5,7 +5,7 @@
       prominent
       src="https://cdn.vuetifyjs.com/images/backgrounds/vbanner.jpg"
     >
-      <v-app-bar-nav-icon @click="isMenuOpened = !isMenuOpened"></v-app-bar-nav-icon>
+      <v-app-bar-nav-icon @click="openMenu"></v-app-bar-nav-icon>
 
       <v-toolbar-title>Task 1</v-toolbar-title>
 
@@ -15,22 +15,29 @@
         <v-icon>mdi-export</v-icon>
       </v-btn>
     </v-toolbar>
-    <v-navigation-drawer
-      v-model="isMenuOpened"
-      app
-      temporary>
 
-    </v-navigation-drawer>
+    <sidebar v-model="isMenuOpened" />
   </div>
 </template>
 
 <script>
+
+import Sidebar from '@/components/Sidebar';
+
 export default {
   name: 'Header',
+  components: {
+    Sidebar,
+  },
   data() {
     return {
-      isMenuOpened: true,
+      isMenuOpened: false,
     };
+  },
+  methods: {
+    openMenu() {
+      this.isMenuOpened = true;
+    },
   },
 };
 </script>
