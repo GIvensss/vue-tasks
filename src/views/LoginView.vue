@@ -1,13 +1,20 @@
 <template>
   <v-container fluid fill-height>
     <v-layout align-center justify-center>
-      <v-flex xs12 sm8 md4 >
-        <v-card class="elevation-12">
+      <v-flex
+        xs12
+        sm8
+        md4 >
+        <v-card
+          class="elevation-12">
           <v-toolbar dark color="primary">
-            <v-toolbar-title>Sign in</v-toolbar-title>
+            <v-toolbar-title>
+              Sign in
+            </v-toolbar-title>
           </v-toolbar>
           <v-card-text>
-            <v-form>
+            <loader v-if="isLoading" />
+            <v-form v-else>
               <v-text-field
                 v-model="email"
                 id="email"
@@ -34,7 +41,12 @@
           </v-card-text>
           <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn @click="onSubmit" color="primary" >Login</v-btn>
+            <v-btn
+              @click="onSubmit"
+              :disabled="isLoading"
+              color="primary">
+              Login
+            </v-btn>
           </v-card-actions>
         </v-card>
       </v-flex>
@@ -44,9 +56,13 @@
 
 <script>
 import { mapActions, mapGetters, mapState } from 'vuex';
+import Loader from '@/components/Loader';
 
 export default {
   name: 'LoginView',
+  components: {
+    Loader,
+  },
   data() {
     return {
       email: '',
@@ -57,6 +73,7 @@ export default {
     ...mapState('loginPage', [
       'error',
       'userId',
+      'isLoading',
     ]),
     ...mapGetters('loginPage', [
       'getErrorMessage',

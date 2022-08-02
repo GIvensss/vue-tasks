@@ -3,17 +3,17 @@ import fetchApi from '@/config/api';
 export default {
   namespaced: true,
   state: {
-    userId: '',
+    news: {},
     error: '',
     isLoading: false,
   },
   actions: {
-    async checkUser({ commit }, data) {
+    async getNews({ commit }) {
       commit('setLoadingStatus', { isLoading: true });
-      const response = await fetchApi('/validate', 'POST', data);
+      const response = await fetchApi('/news', 'GET');
 
       if (response.status === 'ok') {
-        commit('login', { userId: response.data.id });
+        commit('setNews', { news: response.data });
         commit('setErrorMessage', { errorMessage: '' });
         commit('setLoadingStatus', { isLoading: false });
 
@@ -27,8 +27,8 @@ export default {
     },
   },
   mutations: {
-    login(state, { userId }) {
-      state.userId = userId;
+    setNews(state, { news }) {
+      state.news = news;
     },
     setErrorMessage(state, { errorMessage }) {
       state.error = errorMessage;
