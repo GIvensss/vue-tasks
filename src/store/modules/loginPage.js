@@ -4,24 +4,22 @@ export default {
   namespaced: true,
   state: {
     userId: null,
-    error: '',
-    isLoading: false,
   },
   actions: {
     async checkUser({ commit }, data) {
-      commit('setLoadingStatus', { isLoading: true });
+      commit('setLoadingStatus', { isLoading: true }, { root: true });
       const response = await fetchApi('/validate', 'POST', data);
 
       if (response.status === 'ok') {
         commit('login', { userId: response.data.id });
-        commit('setErrorMessage', { errorMessage: '' });
-        commit('setLoadingStatus', { isLoading: false });
+        commit('setErrorMessage', { errorMessage: '' }, { root: true });
+        commit('setLoadingStatus', { isLoading: false }, { root: true });
 
         return true;
       }
 
-      commit('setErrorMessage', { errorMessage: response.message });
-      commit('setLoadingStatus', { isLoading: false });
+      commit('setErrorMessage', { errorMessage: response.message }, { root: true });
+      commit('setLoadingStatus', { isLoading: false }, { root: true });
 
       return false;
     },
@@ -33,16 +31,8 @@ export default {
     logout(state) {
       state.userId = null;
     },
-    setErrorMessage(state, { errorMessage }) {
-      state.error = errorMessage;
-    },
-    setLoadingStatus(state, { isLoading }) {
-      state.isLoading = isLoading;
-    },
   },
   getters: {
-    getErrorMessage(state) {
-      return state.error.split('_').join(' ');
-    },
+
   },
 };

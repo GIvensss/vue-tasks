@@ -8,10 +8,21 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
+    isLoading: false,
+    error: '',
   },
   getters: {
+    getErrorMessage(state) {
+      return state.error.split('_').join(' ');
+    },
   },
   mutations: {
+    setErrorMessage(state, { errorMessage }) {
+      state.error = errorMessage;
+    },
+    setLoadingStatus(state, { isLoading }) {
+      state.isLoading = isLoading;
+    },
   },
   actions: {
   },

@@ -1,35 +1,27 @@
 <template>
   <v-layout justify-center column align-center>
-    <loader v-if="isLoading" />
+    <loader v-if="isLoading"/>
     <template v-else>
-      <v-card
-        v-for="currentNews in news"
-        :key="currentNews.id"
-        elevation="6"
-        class="mt-6"
-        tile
-      >
-        <v-card-title>{{ currentNews.title }}</v-card-title>
-        <v-card-text>{{ currentNews.text }}</v-card-text>
-      </v-card>
+      <news-list :news="news"/>
     </template>
   </v-layout>
 </template>
 
 <script>
+import NewsList from '@/components/blocks/NewsList';
 import { mapActions, mapState } from 'vuex';
-import Loader from '@/components/Loader';
+import Loader from '@/components/base/Loader';
 
 export default {
   name: 'NewsPage',
-  components: { Loader },
+  components: { NewsList, Loader },
   mounted() {
     this.getNews();
   },
   computed: {
+    ...mapState(['isLoading']),
     ...mapState('newsPage', [
       'news',
-      'isLoading',
     ]),
   },
   methods: {

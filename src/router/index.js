@@ -33,6 +33,8 @@ const router = new VueRouter({
 });
 
 router.beforeEach((to, from, next) => {
+  store.commit('setErrorMessage', { errorMessage: '' });
+
   if (to.matched.some((record) => record.meta.requiresAuth)) {
     if (!store.state.loginPage.userId) {
       next('/login');

@@ -9,7 +9,7 @@
 
 <script>
 
-import Toolbar from '@/components/Toolbar';
+import Toolbar from '@/components/blocks/Toolbar';
 
 export default {
   name: 'App',
