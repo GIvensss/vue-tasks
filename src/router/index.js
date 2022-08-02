@@ -8,7 +8,12 @@ Vue.use(VueRouter);
 
 const routes = [
   {
-    path: `${PROFILE_PAGE}/:id?`,
+    path: '/',
+    name: 'Home',
+    component: () => import('../views/NewsView.vue'),
+  },
+  {
+    path: `${PROFILE_PAGE}/:id(\\\\d+)?`,
     name: 'Profile',
     component: ProfileView,
     meta: {
@@ -24,6 +29,10 @@ const routes = [
     path: NEWS_PAGE,
     name: 'News',
     component: () => import('../views/NewsView.vue'),
+  },
+  {
+    path: '*',
+    component: () => import('../views/NotFoundView.vue'),
   },
 ];
 
