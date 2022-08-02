@@ -3,7 +3,7 @@ import fetchApi from '@/config/api';
 export default {
   namespaced: true,
   state: {
-    userId: '',
+    userId: null,
     error: '',
     isLoading: false,
   },
@@ -29,6 +29,9 @@ export default {
   mutations: {
     login(state, { userId }) {
       state.userId = userId;
+    },
+    logout(state) {
+      state.userId = null;
     },
     setErrorMessage(state, { errorMessage }) {
       state.error = errorMessage;

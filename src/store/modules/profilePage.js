@@ -39,7 +39,7 @@ export default {
   },
   getters: {
     mappedSocialNetworks(state) {
-      return state.userData.social.reduce((result, socialNetwork) => (socialNetwork.label === 'web'
+      return state.userData.social?.reduce((result, socialNetwork) => (socialNetwork.label === 'web'
         ? [socialNetwork, ...result]
         : [...result, socialNetwork]), []);
     },

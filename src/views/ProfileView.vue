@@ -40,18 +40,26 @@
 
 <script>
 import { mapActions, mapGetters, mapState } from 'vuex';
+import Loader from '@/components/Loader';
 
 export default {
   name: 'Home',
+  components: {
+    Loader,
+  },
   mounted() {
-    this.getUserInfo(this.$route.params.id);
+    if (this.$route.params.id) {
+      this.getUserInfo(this.$route.params.id);
+    } else {
+      this.getUserInfo(this.userId);
+    }
   },
   computed: {
     languages() {
       return this.userData.languages?.join(', ');
     },
     socialNetworks() {
-      return this.mappedSocialNetworks.map((social) => {
+      return this.mappedSocialNetworks?.map((social) => {
         if (social.label === 'vk') {
           return {
             ...social,
@@ -73,6 +81,9 @@ export default {
     ...mapState('profilePage', [
       'userData',
       'isLoading',
+    ]),
+    ...mapState('loginPage', [
+      'userId',
     ]),
     ...mapGetters('profilePage', [
       'mappedSocialNetworks',

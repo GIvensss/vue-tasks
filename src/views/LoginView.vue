@@ -57,6 +57,7 @@
 <script>
 import { mapActions, mapGetters, mapState } from 'vuex';
 import Loader from '@/components/Loader';
+import { PROFILE_PAGE } from '@/config/constants';
 
 export default {
   name: 'LoginView',
@@ -72,7 +73,6 @@ export default {
   computed: {
     ...mapState('loginPage', [
       'error',
-      'userId',
       'isLoading',
     ]),
     ...mapGetters('loginPage', [
@@ -84,7 +84,7 @@ export default {
       const result = await this.checkUser({ email: this.email, password: this.password });
 
       if (result) {
-        await this.$router.push({ path: `/profile/${this.userId}` });
+        await this.$router.push({ path: PROFILE_PAGE });
       }
     },
     ...mapActions('loginPage', [
