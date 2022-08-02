@@ -67,7 +67,7 @@ export default {
       const result = await this.checkUser({ email: this.email, password: this.password });
 
       if (result) {
-        await this.$router.push({ path: `/user/${this.userId}` });
+        await this.$router.push({ path: `/profile/${this.userId}` });
       }
     },
     ...mapActions('loginPage', [
