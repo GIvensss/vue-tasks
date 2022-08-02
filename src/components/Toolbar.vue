@@ -11,8 +11,10 @@
 
       <v-spacer></v-spacer>
 
-      <v-btn icon>
-        <v-icon>mdi-export</v-icon>
+      <v-btn
+        @click="onIconClick"
+        icon>
+        <v-icon>{{ `mdi-${icon}` }}</v-icon>
       </v-btn>
     </v-toolbar>
 
@@ -23,6 +25,8 @@
 <script>
 
 import Sidebar from '@/components/Sidebar';
+import { mapMutations, mapState } from 'vuex';
+import { LOGIN_PAGE } from '@/config/constants';
 
 export default {
   name: 'Header',
@@ -34,10 +38,31 @@ export default {
       isMenuOpened: false,
     };
   },
+  computed: {
+    icon() {
+      return this.userId
+        ? 'logout'
+        : 'login';
+    },
+    ...mapState('loginPage', [
+      'userId',
+    ]),
+  },
   methods: {
+    onIconClick() {
+      if (this.icon === 'logout') {
+        this[this.icon]();
+      }
+
+      this.$router.push({ path: LOGIN_PAGE });
+    },
     openMenu() {
       this.isMenuOpened = true;
     },
+    ...mapMutations('loginPage', [
+      'logout',
+      'login',
+    ]),
   },
 };
 </script>
