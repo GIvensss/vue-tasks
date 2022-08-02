@@ -1,37 +1,43 @@
 <template>
   <v-card
-    class="elevation-12">
+    max-width="800"
+    class="align-center elevation-12">
     <v-toolbar dark color="primary">
       <v-toolbar-title>
         Sign in
       </v-toolbar-title>
     </v-toolbar>
-    <v-card-text>
-      <loader v-if="isLoading" />
-      <v-form v-else>
-        <v-text-field
-          v-model="email"
-          id="email"
-          name="email"
-          label="Email"
-          type="email"
-        ></v-text-field>
-        <v-text-field
-          v-model="password"
-          id="password"
-          name="password"
-          label="Password"
-          type="password"
-        ></v-text-field>
-      </v-form>
-      <v-alert
-        v-if="getErrorMessage || validationError"
-        border="top"
-        color="red lighten-2"
-        dark
-      >
-        {{ getErrorMessage || validationError }}
-      </v-alert>
+    <v-card-text
+      class="form-content"
+      :class="{'d-flex justify-center align-center': isLoading}">
+      <loader v-if="isLoading"/>
+      <template v-else>
+        <v-form>
+          <v-text-field
+            v-model="email"
+            id="email"
+            name="email"
+            label="Email"
+            type="email"
+          ></v-text-field>
+          <v-text-field
+            v-model="password"
+            id="password"
+            name="password"
+            label="Password"
+            type="password"
+          ></v-text-field>
+        </v-form>
+        <v-alert
+          v-if="getErrorMessage || validationError"
+          border="top"
+          color="red lighten-2"
+          dark
+        >
+          {{ getErrorMessage || validationError }}
+        </v-alert>
+      </template>
+
     </v-card-text>
     <v-card-actions>
       <v-spacer></v-spacer>
@@ -104,5 +110,8 @@ export default {
 </script>
 
 <style scoped>
+.form-content {
+  margin: 40px auto;
+}
 
 </style>
