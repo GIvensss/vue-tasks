@@ -1,25 +1,30 @@
 <template>
   <v-flex>
     <v-card >
-      City: {{ userData.city }}
+      <v-card-title>
+        City: {{ userData.city }}
+      </v-card-title>
     </v-card>
     <v-card class="my-4">
-      Languages: {{ languages }}
+      <v-card-title>
+        Languages: {{ languages }}
+      </v-card-title>
     </v-card>
     <v-card>
       <v-list
         dense
         nav
       >
-        <v-row>
-          <template v-for="social in socialNetworks" >
-            <v-list-item :href="social.link" :key="social.label" target="_blank">
+            <v-list-item
+              v-for="social in socialNetworks"
+              :href="social.link"
+              :key="social.label"
+              class="d-inline-flex"
+              target="_blank">
               <v-list-item-content>
                 <v-icon> {{ `mdi-${social.icon}` }} </v-icon>
               </v-list-item-content>
             </v-list-item>
-          </template>
-        </v-row>
       </v-list>
     </v-card>
   </v-flex>
