@@ -19,9 +19,9 @@ export default {
     this.getNews();
   },
   computed: {
+    ...mapState(['isLoading']),
     ...mapState('newsPage', [
       'news',
-      'isLoading',
     ]),
   },
   methods: {

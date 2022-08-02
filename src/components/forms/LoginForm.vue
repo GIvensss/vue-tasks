@@ -63,13 +63,8 @@ export default {
     };
   },
   computed: {
-    ...mapState('loginPage', [
-      'error',
-      'isLoading',
-    ]),
-    ...mapGetters('loginPage', [
-      'getErrorMessage',
-    ]),
+    ...mapState(['error', 'isLoading']),
+    ...mapGetters(['getErrorMessage']),
   },
   watch: {
     email(newValue) {

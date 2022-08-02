@@ -36,16 +36,13 @@ export default {
     }
   },
   computed: {
+    ...mapState(['isLoading']),
+    ...mapGetters(['getErrorMessage']),
     ...mapState('profilePage', [
       'userData',
-      'isLoading',
     ]),
     ...mapState('loginPage', [
       'userId',
-    ]),
-    ...mapGetters('profilePage', [
-      'mappedSocialNetworks',
-      'getErrorMessage',
     ]),
   },
   methods: {

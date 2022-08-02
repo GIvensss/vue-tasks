@@ -4,12 +4,10 @@ export default {
   namespaced: true,
   state: {
     userData: {},
-    error: '',
-    isLoading: false,
   },
   actions: {
     async getUserInfo({ commit }, userId) {
-      commit('setLoadingStatus', { isLoading: true });
+      commit('setLoadingStatus', { isLoading: true }, { root: true });
       const response = await fetchApi(`/user-info/${userId}`, 'GET');
 
       if (response.status === 'ok') {
@@ -20,14 +18,14 @@ export default {
           : [...result, socialNetwork]), []);
 
         commit('setUserInfo', { userData });
-        commit('setErrorMessage', { errorMessage: '' });
-        commit('setLoadingStatus', { isLoading: false });
+        commit('setErrorMessage', { errorMessage: '' }, { root: true });
+        commit('setLoadingStatus', { isLoading: false }, { root: true });
 
         return true;
       }
 
-      commit('setErrorMessage', { errorMessage: response.message });
-      commit('setLoadingStatus', { isLoading: false });
+      commit('setErrorMessage', { errorMessage: response.message }, { root: true });
+      commit('setLoadingStatus', { isLoading: false }, { root: true });
 
       return false;
     },
@@ -35,17 +33,6 @@ export default {
   mutations: {
     setUserInfo(state, { userData }) {
       state.userData = userData;
-    },
-    setErrorMessage(state, { errorMessage }) {
-      state.error = errorMessage;
-    },
-    setLoadingStatus(state, { isLoading }) {
-      state.isLoading = isLoading;
-    },
-  },
-  getters: {
-    getErrorMessage(state) {
-      return state.error.split('_').join(' ');
     },
   },
 };
