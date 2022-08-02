@@ -20,6 +20,7 @@
               :href="social.link"
               :key="social.label"
               class="d-inline-flex"
+              rel="noreferrer noopenet"
               target="_blank">
               <v-list-item-content>
                 <v-icon> {{ `mdi-${social.icon}` }} </v-icon>
