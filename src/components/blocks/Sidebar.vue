@@ -21,7 +21,7 @@
       dense
       nav
     >
-      <template v-for="item in items" >
+      <template v-for="item in filteredNavigationItems" >
         <router-link :to="item.redirectsTo" :key="item.title">
           <v-list-item
             link
@@ -38,6 +38,7 @@
 
 <script>
 import { LOGIN_PAGE, NEWS_PAGE, PROFILE_PAGE } from '@/config/constants';
+import { mapState } from 'vuex';
 
 export default {
   name: 'Sidebar',
@@ -49,12 +50,22 @@ export default {
   },
   data() {
     return {
-      items: [
+      navigationItems: [
         { title: 'Login', redirectsTo: LOGIN_PAGE },
         { title: 'Profile', redirectsTo: PROFILE_PAGE },
         { title: 'News', redirectsTo: NEWS_PAGE },
       ],
     };
+  },
+  computed: {
+    filteredNavigationItems() {
+      return this.userId
+        ? this.navigationItems.filter(({ title }) => title !== 'Login')
+        : this.navigationItems.filter(({ title }) => title !== 'Profile');
+    },
+    ...mapState('loginPage', [
+      'userId',
+    ]),
   },
   methods: {
   },
