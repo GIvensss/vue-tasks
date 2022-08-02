@@ -1,37 +1,40 @@
 <template>
   <v-layout app align-center justify-center mt-6>
-    <v-alert
-      v-if="getErrorMessage"
-      border="top"
-      color="red lighten-2"
-      dark
-    >
-      {{ getErrorMessage }}
-    </v-alert>
-    <v-flex v-else>
-      <v-card >
-        City: {{ userData.city }}
-      </v-card>
-      <v-card class="my-4">
-        Languages: {{ languages }}
-      </v-card>
-      <v-card>
-        <v-list
-          dense
-          nav
-        >
-          <v-row>
-            <template v-for="social in socialNetworks" >
+    <loader v-if="isLoading" />
+    <template v-else>
+      <v-alert
+        v-if="getErrorMessage"
+        border="top"
+        color="red lighten-2"
+        dark
+      >
+        {{ getErrorMessage }}
+      </v-alert>
+      <v-flex v-else>
+        <v-card >
+          City: {{ userData.city }}
+        </v-card>
+        <v-card class="my-4">
+          Languages: {{ languages }}
+        </v-card>
+        <v-card>
+          <v-list
+            dense
+            nav
+          >
+            <v-row>
+              <template v-for="social in socialNetworks" >
                 <v-list-item :href="social.link" :key="social.label" target="_blank">
                   <v-list-item-content>
                     <v-icon> {{ `mdi-${social.icon}` }} </v-icon>
                   </v-list-item-content>
                 </v-list-item>
-            </template>
-          </v-row>
-        </v-list>
-      </v-card>
+              </template>
+            </v-row>
+          </v-list>
+        </v-card>
       </v-flex>
+    </template>
   </v-layout>
 </template>
 
