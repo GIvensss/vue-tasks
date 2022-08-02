@@ -22,13 +22,11 @@
         >
           <v-row>
             <template v-for="social in socialNetworks" >
-              <router-link :to="social.link" :key="social.label">
-                <v-list-item>
+                <v-list-item :href="social.link" :key="social.label" target="_blank">
                   <v-list-item-content>
                     <v-icon> {{ `mdi-${social.icon}` }} </v-icon>
                   </v-list-item-content>
                 </v-list-item>
-              </router-link>
             </template>
           </v-row>
         </v-list>
