@@ -3,7 +3,7 @@ import fetchApi from '@/config/api';
 export default {
   namespaced: true,
   state: {
-    news: {},
+    news: [],
     error: '',
     isLoading: false,
   },

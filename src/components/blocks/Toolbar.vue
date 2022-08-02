@@ -24,7 +24,7 @@
 
 <script>
 
-import Sidebar from '@/components/Sidebar';
+import Sidebar from '@/components/blocks/Sidebar';
 import { mapMutations, mapState } from 'vuex';
 import { LOGIN_PAGE } from '@/config/constants';
 

@@ -13,7 +13,13 @@ export default {
       const response = await fetchApi(`/user-info/${userId}`, 'GET');
 
       if (response.status === 'ok') {
-        commit('setUserInfo', { userData: response.data });
+        const userData = response.data;
+
+        userData.social = userData.social?.reduce((result, socialNetwork) => (socialNetwork.label === 'web'
+          ? [socialNetwork, ...result]
+          : [...result, socialNetwork]), []);
+
+        commit('setUserInfo', { userData });
         commit('setErrorMessage', { errorMessage: '' });
         commit('setLoadingStatus', { isLoading: false });
 
@@ -38,11 +44,6 @@ export default {
     },
   },
   getters: {
-    mappedSocialNetworks(state) {
-      return state.userData.social?.reduce((result, socialNetwork) => (socialNetwork.label === 'web'
-        ? [socialNetwork, ...result]
-        : [...result, socialNetwork]), []);
-    },
     getErrorMessage(state) {
       return state.error.split('_').join(' ');
     },
